@@ -1,4 +1,4 @@
-package buscaSubstituicao;
+package dio.buscaSubstituicao;
 
 import java.io.BufferedReader;
 import java.io.IOException;
