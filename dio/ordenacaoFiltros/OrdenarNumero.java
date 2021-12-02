@@ -1,4 +1,4 @@
-package ordenacaoFiltros;
+package dio.ordenacaoFiltros;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
