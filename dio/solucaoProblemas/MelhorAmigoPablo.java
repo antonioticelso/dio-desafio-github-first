@@ -54,7 +54,7 @@ public class MelhorAmigoPablo {
 
 		for (Entry<String, Integer> key : friends.entrySet()) {
 			System.out.println(key.getKey());
-			System.out.println(key.getKey().length());
+			// System.out.println(key.getKey().length());
 		}
 		for (Entry<String, Integer> key : friendsNot.entrySet()) {
 			System.out.println(key.getKey());

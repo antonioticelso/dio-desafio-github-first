@@ -17,11 +17,11 @@ public class VogalExtraterrestre {
 			palavra2 = scr.nextLine();
 			int tamanhoMax = 0;
 
-			if (palavra2.length() < palavra1.length()) {
-				String menorPalavra = palavra2;
-				palavra2 = palavra1;
-				palavra1 = menorPalavra;
-			}
+//			if (palavra2.length() < palavra1.length()) {
+//				String menorPalavra = palavra2;
+//				palavra2 = palavra1;
+//				palavra1 = menorPalavra;
+//			}
 
 			for (int i = 0; i < palavra1.length(); i++) {
 				for (int j = 0; j < palavra2.length(); j++) {
