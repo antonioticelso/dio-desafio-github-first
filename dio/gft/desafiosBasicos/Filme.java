@@ -14,5 +14,7 @@ public class Filme {
         System.out.println(aumentoIngresso);
         System.out.println("%");
 
+        leitor.close();
+
     }
 }
