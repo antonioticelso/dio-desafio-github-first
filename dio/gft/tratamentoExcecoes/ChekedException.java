@@ -3,36 +3,79 @@ package dio.gft.tratamentoExcecoes;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import javax.swing.JOptionPane;
+
 public class ChekedException {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String nomeDoArquivo = "romances-blake.txt";
+
         imprimirArquivoNoConsole(nomeDoArquivo);
+
+    }
+
+    public static void imprimirArquivoNoConsole(String nomeDoArquivo) {
+
+        try {
+            BufferedReader br = lerArquivo(nomeDoArquivo);
+            String line = br.readLine();
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+            do {
+                bw.write(line);
+                bw.newLine();
+                line = br.readLine();
+    
+            } while(line != null);
+    
+            bw.flush();
+            br.close();
+
+        } catch (ImpossivelAberturaDeArquivoException e) {
+            JOptionPane.showMessageDialog(null, "Revise o nome do arquivo para impressao! " + e.getMessage());
+            e.printStackTrace();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Revise o nome do arquivo para impressao! " + ex.getMessage());
+            ex.printStackTrace();
+        }
+
         
     }
 
-    public static void imprimirArquivoNoConsole(String nomeDoArquivo) throws IOException {
+    public static BufferedReader lerArquivo(String nomeDoArquivo) throws ImpossivelAberturaDeArquivoException {
         File file = new File(nomeDoArquivo);
 
-        BufferedReader br = new BufferedReader(new FileReader(file.getName()));
-        String line = br.readLine();
+        try {
+            return new BufferedReader(new FileReader(nomeDoArquivo));
+        } catch (FileNotFoundException e) {
+            throw new ImpossivelAberturaDeArquivoException(file.getName(), file.getPath());
+        }
+    }
 
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+}
 
-        do {
-            bw.write(line);
-            bw.newLine();
-            line = br.readLine();
+class ImpossivelAberturaDeArquivoException extends Exception {
 
-        } while(line != null);
+    private String nomeDoArquivo;
+    private String diretorio;
 
-        bw.flush();
-        br.close();
-        
+    public ImpossivelAberturaDeArquivoException(String nomeDoArquivo, String diretorio) {
+        super("O arquivo " + nomeDoArquivo + " não foi encontrado no diretório: " + diretorio);
+        this.nomeDoArquivo = nomeDoArquivo;
+        this.diretorio = diretorio;
+    }
+
+    @Override
+    public String toString() {
+        return "ImpossivelAberturaDeArquivoException{" +
+                "nomeDoArquivo='" + nomeDoArquivo + '\'' +
+                ", diretorio='" + diretorio + '\'' +
+                '}';
     }
 
 }

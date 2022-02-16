@@ -11,28 +11,48 @@ public class NotacaoCientifica {
 
         Scanner leitor = new Scanner(System.in);
 
-        double numero = leitor.nextDouble();
+//        float numero = leitor.nextFloat();
+        double numero = leitor.nextFloat();
+    //    Long numero = -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000L;
+        int cont = 0;
+
         String operadorI = (numero > 0) ? "+" : "-";
-        String operadorII = (numero > 1) ? "+" : "-";
-        String mantissa = String.format("%.4f", numero);
+        String operadorII = "+";
+        String mantissa;
         String expoente;
 
+        if (numero == 0) {
+            numero = numero * (-1);
+            operadorII = (numero >= 0) ? "+" : "-";
 
-         System.out.println(operadorI + mantissa + "E" + operadorII + expoente);
+            System.out.println(operadorI + "0.0000E" + operadorII + "00");
+        }
 
+        if (numero != 0) {
+            numero = (numero >= 0) ? (numero * 1) : (numero * -1);
 
-//        if (numero > 0)
-//            System.out.printf("+%.4fE+%d", numero, expoente);
-//        else
-//            System.out.printf("-%.4fE-%d", numero, expoente);
+            while (numero < 1) {
+                operadorII = "-";
+                cont++;
+                numero = numero * 10;
+            }
 
+            while (numero >= 10) {
+                operadorII = "+";
+                cont++;
+                numero = numero / 10;
+            }
 
-//        System.out.printf("%.4f", numero);
-//        System.out.printf("E+%d", expoente);
+            expoente = (cont < 10) ? ("0" + cont) : String.valueOf(cont);
+
+            mantissa = String.format("%.4f", numero);
+
+            System.out.println(operadorI + mantissa + "E" + operadorII + expoente);
+
+        }
 
         leitor.close();
 
     }
-
 
 }
