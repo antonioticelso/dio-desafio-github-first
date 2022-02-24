@@ -7,83 +7,98 @@ public class NotacaoCientificaString {
     public static void main(String[] args) {
         Scanner leitor = new Scanner(System.in);
 
-        String numero = leitor.nextLine();
+        String numero = leitor.nextLine(); // 15 digitos
 
         String operadorI = "+";
         String mantissa = "0.0000";
         String constante = "E";
         String operadorII = "+";
         String expoente = "00";
-            
+
         int cont = 0;
+        boolean p = false;
         double passagem = 0;
-        
+
         if (String.valueOf(numero.charAt(0)).equals("-")) {
             operadorI = "-";
             String substituta = "";
             for (int i = 1; i < numero.length(); i++) {
-              substituta = substituta + numero.charAt(i);
+                substituta = substituta + numero.charAt(i);
             }
             numero = substituta;
-          }
-          
-          for (int i = 0; i < numero.length(); i++) {
-            if (!String.valueOf(numero.charAt(i)).equals("0")) {
-              if (!String.valueOf(numero.charAt(i)).equals(".")) {
-                mantissa = numero.substring(i, numero.length());
+        }
+
+        for (int i = 0; i < numero.length(); i++) {
+            if (String.valueOf(numero.charAt(i)).equals(".")) {
+                p = true;
                 break;
-              }
-              
             }
-          }
-          
-          if (mantissa.length() < 6) {
+        }
+
+        for (int i = 0; i < numero.length(); i++) {
+            if (!String.valueOf(numero.charAt(i)).equals("0")) {
+                if (!String.valueOf(numero.charAt(i)).equals(".")) {
+                    mantissa = numero.substring(i, numero.length());
+                    break;
+                }
+
+            }
+        }
+
+        if (mantissa.length() < 6) {
             String substituta = mantissa;
             mantissa = "";
             for (int i = substituta.length(); i < 5; i++) {
-              substituta = substituta + "0";
+                substituta = substituta + "0";
             }
-            
+
             for (int k = 0; k < substituta.length(); k++) {
-              if (k == 1) {
-                mantissa = mantissa + ".";
-              }
-              mantissa = mantissa + substituta.charAt(k);
+                if (k == 1) {
+                    mantissa = mantissa + ".";
+                }
+                mantissa = mantissa + substituta.charAt(k);
             }
-          }
-      
-          
-          passagem = Double.parseDouble(numero);
-      
-          if (passagem < 1 && passagem > 0) {
-            operadorII = "-";
+        }
+
+        if (!p) {
             
-            while (passagem < 1) {
-              cont++;
-              passagem = passagem * 10;
+            if (numero.length() - 1 < 10) {
+                expoente = "0" + String.valueOf( numero.length() - 1);
+            } else{
+                expoente = String.valueOf( numero.length() - 1);
+
             }
-          }
-          
-          while(passagem >= 10) {
-            cont++;
-            passagem = passagem / 10;
-          }
-          
-          
-          if (cont < 10) {
-            expoente = "0" + cont;
-          } else {
-            expoente = String.valueOf(cont);
-          }
-      
-      
-          
-          
-          System.out.println(operadorI + mantissa + constante + operadorII + expoente);
-          
-          
-          leitor.close();
-          
+
+        }
+
+        if (p) {
+            passagem = Double.parseDouble(numero);
+
+            if (passagem < 1 && passagem > 0) {
+                operadorII = "-";
+
+                while (passagem < 1) {
+                    cont++;
+                    passagem = passagem * 10;
+                }
+            }
+
+            while (passagem >= 10) {
+                cont++;
+                passagem = passagem / 10;
+            }
+
+            if (cont < 10) {
+                expoente = "0" + cont;
+            } else {
+                expoente = String.valueOf(cont);
+            }
+        }
+
+        System.out.println(operadorI + mantissa + constante + operadorII + expoente);
+
+        leitor.close();
+
     }
 
 }
