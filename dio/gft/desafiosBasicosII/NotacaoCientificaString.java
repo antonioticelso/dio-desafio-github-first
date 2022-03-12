@@ -41,8 +41,8 @@ public class NotacaoCientificaString {
                     mantissa = numero.substring(i, numero.length());
                     break;
                 }
-
             }
+
         }
 
         if (mantissa.length() < 6) {
@@ -58,25 +58,22 @@ public class NotacaoCientificaString {
                 }
                 mantissa = mantissa + substituta.charAt(k);
             }
+
         }
 
         if (!p) {
-            
             if (numero.length() - 1 < 10) {
                 expoente = "0" + String.valueOf( numero.length() - 1);
             } else{
                 expoente = String.valueOf( numero.length() - 1);
-
             }
 
         }
 
         if (p) {
             passagem = Double.parseDouble(numero);
-
             if (passagem < 1 && passagem > 0) {
                 operadorII = "-";
-
                 while (passagem < 1) {
                     cont++;
                     passagem = passagem * 10;
@@ -93,10 +90,10 @@ public class NotacaoCientificaString {
             } else {
                 expoente = String.valueOf(cont);
             }
+
         }
 
         System.out.println(operadorI + mantissa + constante + operadorII + expoente);
-
         leitor.close();
 
     }
