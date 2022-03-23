@@ -1,4 +1,4 @@
-package dio.gft.padroesProjeto;
+package dio.gft.padroesProjeto.singletons;
 
 /**
  * Singleton
