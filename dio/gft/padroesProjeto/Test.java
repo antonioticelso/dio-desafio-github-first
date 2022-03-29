@@ -1,5 +1,6 @@
 package dio.gft.padroesProjeto;
 
+import dio.gft.padroesProjeto.facade.Facade;
 import dio.gft.padroesProjeto.singletons.SingletonEager;
 import dio.gft.padroesProjeto.singletons.SingletonLazy;
 import dio.gft.padroesProjeto.singletons.SingletonLazyHolder;
@@ -43,6 +44,10 @@ public class Test {
         r.mover();
         r.mover();
         r.mover();
+
+
+        Facade facade = new Facade();
+        facade.migrarCliente("Dom Ruan", "14801765");
     }
 
 }
